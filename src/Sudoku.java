@@ -8,6 +8,7 @@ public class Sudoku {
         // obliczanie brakujących elementów
         int rowIndex = 0;
         while (rowIndex < sudoku.length) {
+
             int n = 6 - (sudoku[rowIndex][0] + sudoku[rowIndex][1] + sudoku[rowIndex][2]);  // 6 to suma wartości wszystkich elementów każdego wiersza
             int colIndex = 0;
             while (colIndex < sudoku[rowIndex].length) {
