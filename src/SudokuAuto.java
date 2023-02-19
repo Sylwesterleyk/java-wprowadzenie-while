@@ -3,7 +3,7 @@ public class SudokuAuto {
 
         // wartości sudoku
         int x = 0;
-        int[][] sudoku = {{1, 4, 3, 2}, {4, 1, 2, 3}, {x, 3, 4, 1}, {3, x, 1, 4}};
+        int[][] sudoku = {{1, x, 3, 2}, {4, x, 2, 3}, {x, 3, 4, 1}, {3, x, 1, 4}};
 
         // wyświetlenie sudoku
         System.out.println("Wprowadzone sudoku:");
