@@ -3,7 +3,7 @@ public class ExampleSix {
 
         // wartości sudoku
         int x = 0;
-        int[][] sudoku = {{2, x, x}, {x, 1, 2}, {1, 2, x}};
+        int[][] sudoku = {{x, 3, x}, {x, 1, 2}, {1, 2, x}};
 
         // wyświetlenie sudoku
         System.out.println("Wprowadzone sudoku:");
@@ -28,8 +28,16 @@ public class ExampleSix {
         // obliczenie brakującej cyfry oraz zapamiętanie jej indeksu (jeśli w wierszu jest jedna niewiadoma)
         rowIndex = 0;
         while (rowIndex < sudoku.length) {
-            if ((sudoku[rowIndex][0] + sudoku[rowIndex][1] + sudoku[rowIndex][2]) >= 3) {
-                int colIndex = 0;
+            int zera = 0;
+            int colIndex = 0;
+            while (colIndex < sudoku.length) {
+                if (sudoku[rowIndex][colIndex] == 0) {
+                    zera++;
+                }
+                colIndex++;
+            }
+            if (zera < 2) {
+                colIndex = 0;
                 int emptyRowIndex = 0;
                 int emptyColIndex = 0;
                 int niewiadoma = sum;
@@ -84,7 +92,6 @@ public class ExampleSix {
         }
     }
 }
-
 
 
 
