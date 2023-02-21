@@ -3,7 +3,7 @@ public class ExampleSix {
 
         // wartości sudoku
         int x = 0;
-        int[][] sudoku = {{x, 3, x}, {x, 1, 2}, {1, 2, x}};
+        int[][] sudoku = {{2, x, x}, {x, x, 2}, {1, 2, x}};
 
         // wyświetlenie sudoku
         System.out.println("Wprowadzone sudoku:");
@@ -36,7 +36,7 @@ public class ExampleSix {
                 }
                 colIndex++;
             }
-            if (zera < 2) {
+            if (zera == 1) {
                 colIndex = 0;
                 int emptyRowIndex = 0;
                 int emptyColIndex = 0;
@@ -58,7 +58,73 @@ public class ExampleSix {
         // obliczanie brakującej cyfry oraz zapamietanie jej indeksu (w uzupełnieniu o nowe dane)
         int colIndex = 0;
         while (colIndex < sudoku.length) {
-            if ((sudoku[0][colIndex] + sudoku[1][colIndex] + sudoku[2][colIndex]) < sum) {
+            int zera = 0;
+            rowIndex = 0;
+            while (rowIndex < sudoku.length) {
+                if (sudoku[rowIndex][colIndex] == 0) {
+                    zera++;
+                }
+                rowIndex++;
+            }
+            if (zera == 1) {
+                rowIndex = 0;
+                int emptyRowIndex = 0;
+                int emptyColIndex = 0;
+                int niewiadoma = sum;
+                while (rowIndex < sudoku.length) {
+                    niewiadoma -= sudoku[rowIndex][colIndex];
+                    if (sudoku[rowIndex][colIndex] == 0) {
+                        emptyRowIndex = rowIndex;
+                        emptyColIndex = colIndex;
+                    }
+                    rowIndex++;
+                }
+                sudoku[emptyRowIndex][emptyColIndex] = niewiadoma;
+
+            }
+            colIndex++;
+        }
+        rowIndex = 0;
+        while (rowIndex < sudoku.length) {
+            int zera = 0;
+             colIndex = 0;
+            while (colIndex < sudoku.length) {
+                if (sudoku[rowIndex][colIndex] == 0) {
+                    zera++;
+                }
+                colIndex++;
+            }
+            if (zera == 1) {
+                colIndex = 0;
+                int emptyRowIndex = 0;
+                int emptyColIndex = 0;
+                int niewiadoma = sum;
+                while (colIndex < sudoku[rowIndex].length) {
+                    niewiadoma -= sudoku[rowIndex][colIndex];
+                    if (sudoku[rowIndex][colIndex] == 0) {
+                        emptyRowIndex = rowIndex;
+                        emptyColIndex = colIndex;
+                    }
+                    colIndex++;
+                }
+                sudoku[emptyRowIndex][emptyColIndex] = niewiadoma;
+
+            }
+            rowIndex++;
+        }
+
+        // obliczanie brakującej cyfry oraz zapamietanie jej indeksu (w uzupełnieniu o nowe dane)
+         colIndex = 0;
+        while (colIndex < sudoku.length) {
+            int zera = 0;
+            rowIndex = 0;
+            while (rowIndex < sudoku.length) {
+                if (sudoku[rowIndex][colIndex] == 0) {
+                    zera++;
+                }
+                rowIndex++;
+            }
+            if (zera == 1) {
                 rowIndex = 0;
                 int emptyRowIndex = 0;
                 int emptyColIndex = 0;
@@ -92,6 +158,7 @@ public class ExampleSix {
         }
     }
 }
+
 
 
 
