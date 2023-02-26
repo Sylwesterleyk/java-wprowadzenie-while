@@ -24,131 +24,93 @@ public class ExampleSix {
             sum += ++z;
         }
 
-
-        // obliczenie brakującej cyfry oraz zapamiętanie jej indeksu (jeśli w wierszu jest jedna niewiadoma)
+        // obliczanie ile jest niewiadomych liczb
+        int pustePola = 0;
         rowIndex = 0;
         while (rowIndex < sudoku.length) {
-            int zera = 0;
             int colIndex = 0;
             while (colIndex < sudoku.length) {
                 if (sudoku[rowIndex][colIndex] == 0) {
-                    zera++;
+                    pustePola++;
                 }
                 colIndex++;
             }
-            if (zera == 1) {
-                colIndex = 0;
-                int emptyRowIndex = 0;
-                int emptyColIndex = 0;
-                int niewiadoma = sum;
-                while (colIndex < sudoku[rowIndex].length) {
-                    niewiadoma -= sudoku[rowIndex][colIndex];
+            rowIndex++;
+        }
+        // wykonywanie obliczeń w pętli tak długo, jak istnieją nieobliczone pole
+        while (pustePola > 0) {
+            // obliczenie brakującej cyfry oraz zapamiętanie jej indeksu W WIERSZU
+            rowIndex = 0;
+            while (rowIndex < sudoku.length) {
+                int zera = 0;
+                int colIndex = 0;
+                while (colIndex < sudoku.length) {
                     if (sudoku[rowIndex][colIndex] == 0) {
-                        emptyRowIndex = rowIndex;
-                        emptyColIndex = colIndex;
+                        zera++;
                     }
                     colIndex++;
                 }
-                sudoku[emptyRowIndex][emptyColIndex] = niewiadoma;
+                // obliczanie pod warunkiem, że niewiadoma jest jedna
+                if (zera == 1) {
+                    colIndex = 0;
+                    int emptyRowIndex = 0;
+                    int emptyColIndex = 0;
+                    int niewiadoma = sum;
+                    while (colIndex < sudoku[rowIndex].length) {
+                        niewiadoma -= sudoku[rowIndex][colIndex];
+                        if (sudoku[rowIndex][colIndex] == 0) {
+                            emptyRowIndex = rowIndex;
+                            emptyColIndex = colIndex;
+                        }
+                        colIndex++;
+                    }
+                    sudoku[emptyRowIndex][emptyColIndex] = niewiadoma;
+                    pustePola--;
 
-            }
-            rowIndex++;
-        }
-
-        // obliczanie brakującej cyfry oraz zapamietanie jej indeksu (w uzupełnieniu o nowe dane)
-        int colIndex = 0;
-        while (colIndex < sudoku.length) {
-            int zera = 0;
-            rowIndex = 0;
-            while (rowIndex < sudoku.length) {
-                if (sudoku[rowIndex][colIndex] == 0) {
-                    zera++;
                 }
                 rowIndex++;
             }
-            if (zera == 1) {
-                rowIndex = 0;
-                int emptyRowIndex = 0;
-                int emptyColIndex = 0;
-                int niewiadoma = sum;
-                while (rowIndex < sudoku.length) {
-                    niewiadoma -= sudoku[rowIndex][colIndex];
-                    if (sudoku[rowIndex][colIndex] == 0) {
-                        emptyRowIndex = rowIndex;
-                        emptyColIndex = colIndex;
-                    }
-                    rowIndex++;
-                }
-                sudoku[emptyRowIndex][emptyColIndex] = niewiadoma;
 
-            }
-            colIndex++;
-        }
-        rowIndex = 0;
-        while (rowIndex < sudoku.length) {
-            int zera = 0;
-             colIndex = 0;
+            // obliczanie brakującej cyfry oraz zapamietanie jej indeksu W KOLUMNIE
+            int colIndex = 0;
             while (colIndex < sudoku.length) {
-                if (sudoku[rowIndex][colIndex] == 0) {
-                    zera++;
-                }
-                colIndex++;
-            }
-            if (zera == 1) {
-                colIndex = 0;
-                int emptyRowIndex = 0;
-                int emptyColIndex = 0;
-                int niewiadoma = sum;
-                while (colIndex < sudoku[rowIndex].length) {
-                    niewiadoma -= sudoku[rowIndex][colIndex];
-                    if (sudoku[rowIndex][colIndex] == 0) {
-                        emptyRowIndex = rowIndex;
-                        emptyColIndex = colIndex;
-                    }
-                    colIndex++;
-                }
-                sudoku[emptyRowIndex][emptyColIndex] = niewiadoma;
-
-            }
-            rowIndex++;
-        }
-
-        // obliczanie brakującej cyfry oraz zapamietanie jej indeksu (w uzupełnieniu o nowe dane)
-         colIndex = 0;
-        while (colIndex < sudoku.length) {
-            int zera = 0;
-            rowIndex = 0;
-            while (rowIndex < sudoku.length) {
-                if (sudoku[rowIndex][colIndex] == 0) {
-                    zera++;
-                }
-                rowIndex++;
-            }
-            if (zera == 1) {
+                int zera = 0;
                 rowIndex = 0;
-                int emptyRowIndex = 0;
-                int emptyColIndex = 0;
-                int niewiadoma = sum;
                 while (rowIndex < sudoku.length) {
-                    niewiadoma -= sudoku[rowIndex][colIndex];
                     if (sudoku[rowIndex][colIndex] == 0) {
-                        emptyRowIndex = rowIndex;
-                        emptyColIndex = colIndex;
+                        zera++;
                     }
                     rowIndex++;
                 }
-                sudoku[emptyRowIndex][emptyColIndex] = niewiadoma;
+                // obliczanie pod warunkiem, że niewiadoma jest jedna
+                if (zera == 1) {
+                    rowIndex = 0;
+                    int emptyRowIndex = 0;
+                    int emptyColIndex = 0;
+                    int niewiadoma = sum;
+                    while (rowIndex < sudoku.length) {
+                        niewiadoma -= sudoku[rowIndex][colIndex];
+                        if (sudoku[rowIndex][colIndex] == 0) {
+                            emptyRowIndex = rowIndex;
+                            emptyColIndex = colIndex;
+                        }
+                        rowIndex++;
+                    }
+                    sudoku[emptyRowIndex][emptyColIndex] = niewiadoma;
+                    pustePola--;
 
+                }
+                colIndex++;
             }
-            colIndex++;
         }
+
 
 
         // wyświetlenie sudoku z podstawionymi niewiadomymi
         System.out.println("Uzupełnione sudoku:");
         rowIndex = 0;
         while (rowIndex < sudoku.length) {
-            colIndex = 0;
+           int colIndex = 0;
             while (colIndex < sudoku[rowIndex].length) {
                 System.out.print(sudoku[rowIndex][colIndex] + " ");
                 colIndex++;
